@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-deployment
+  labels:
+    app: node-hello-world
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-hello-world
+  template:
+    metadata:
+      labels:
+        app: node-hello-world
+    spec:
+      containers:
+      - name: flask
+        image: apaul18/node_hello_world:latest
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "500m"    # Establecer el límite de CPU a 500 milicpus
+            memory: "512Mi" # Establecer el límite de memoria a 512 mebibytes
+          requests:
+            cpu: "100m"    # Establecer la solicitud de CPU a 100 milicpus
+            memory: "256Mi" # Establecer la solicitud de memoria a 256 mebibytes
+
